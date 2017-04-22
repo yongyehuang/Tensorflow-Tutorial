@@ -1,4 +1,4 @@
-# Tensorlow-Tutorial
+# Tensorflow-Tutorial
 Some interesting TensorFlow tutorials for beginners.
 本人在自己学习 TensorFlow 过程中做的一些总结。希望能够帮助初学者解决一些学习过程中的疑惑，快速上手。首先介绍 TensorFlow 的基本使用，然后会相继介绍 CNN 、LSTM、seq2seq 等技术。涉及图像，文本，序列预测等主题。
 
