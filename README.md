@@ -8,6 +8,7 @@ Some interesting TensorFlow tutorials for beginners.
 - [TensorFlow入门（三）多层 CNNs 实现 mnist分类](http://blog.csdn.net/jerr__y/article/details/57086434)
 - [TensorFlow入门（四） name / variable_scope 的使用](http://blog.csdn.net/jerr__y/article/details/60877873)
 - [TensorFlow入门（五）多层 LSTM 通俗易懂版](http://blog.csdn.net/jerr__y/article/details/61195257)
+- [TensorFlow入门（六） 双端 LSTM 实现序列标注（分词）](http://blog.csdn.net/jerr__y/article/details/70471066)
 
 ## Dependencies
 - python 2.7
