@@ -1,0 +1,5 @@
+model_checkpoint_path: "bi-lstm.ckpt-12"
+all_model_checkpoint_paths: "bi-lstm.ckpt-3"
+all_model_checkpoint_paths: "bi-lstm.ckpt-6"
+all_model_checkpoint_paths: "bi-lstm.ckpt-9"
+all_model_checkpoint_paths: "bi-lstm.ckpt-12"
