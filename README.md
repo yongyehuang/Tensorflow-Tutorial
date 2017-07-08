@@ -13,7 +13,7 @@ Some interesting TensorFlow tutorials for beginners.
 
 ## Dependencies
 - python 2.7
-- tensorflow 1.0.0 (gpu version)
+- tensorflow 1.1.0 (gpu version)
 - numpy
 - matplotlib
 - pandas
