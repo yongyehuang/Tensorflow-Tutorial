@@ -1,3 +1,4 @@
 ckpt/*
 summary/*
-
+data/*
+*.pyc
