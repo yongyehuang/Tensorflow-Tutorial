@@ -1,6 +1,6 @@
 # Tensorflow-Tutorial
 Some interesting TensorFlow tutorials for beginners.
-本人在自己学习 TensorFlow 过程中做的一些总结。希望能够帮助初学者解决一些学习过程中的疑惑，快速上手。首先介绍 TensorFlow 的基本使用，然后会相继介绍 CNN 、LSTM、seq2seq 等技术。涉及图像，文本，序列预测等主题。
+本人在自己学习 TensorFlow 过程中做的一些总结。希望能够帮助初学者解决一些学习过程中的疑惑，快速上手。首先介绍 TensorFlow 的基本使用，然后会相继介绍 CNN 、LSTM、seq2seq 等技术。涉及图像，文本，序列预测等主题。前面的一些例子主要参考了官网教程；后面有些例子主要是我在项目中的总结，有些可能不适合入门新手，想进一步提升或者刚好有任务需要的可以参考。
 
 下面是相关的博客，由于时间关系，博客中的tensorflow版本可能较老没有进行更新，如果有问题，欢迎开issue或者邮件与我联系。
 
@@ -15,6 +15,7 @@ Some interesting TensorFlow tutorials for beginners.
 - [TensorFlow入门（八）tensorboard 的一个简单示例]
 - [TensorFlow入门（九）使用 tf.train.Saver()保存模型]
 - [TensorFlow入门（十）【迁移学习】往一个已经保存好的模型添加新的变量并进行微调]
+- [Tensorflow入门（十一） 【模型联合】如何利用tf.train.saver()把多个预训练好的模型联合起来fine-tune](https://github.com/yongyehuang/zhihu-text-classification/blob/master/models/Using%20saver%20to%20combine%20models.ipynb)
 
 ## Dependencies
 - python 2.7

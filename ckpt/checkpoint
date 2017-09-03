@@ -1,2 +1,2 @@
-model_checkpoint_path: "test-model.ckpt-2"
-all_model_checkpoint_paths: "test-model.ckpt-2"
+model_checkpoint_path: "T9-2-vs2.ckpt-1"
+all_model_checkpoint_paths: "T9-2-vs2.ckpt-1"

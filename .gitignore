@@ -2,3 +2,5 @@ ckpt/*
 summary/*
 data/*
 *.pyc
+.ipynb_checkpoints/*
+
