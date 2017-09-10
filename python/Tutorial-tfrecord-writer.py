@@ -12,11 +12,11 @@ refer: http://blog.csdn.net/qq_16949707/article/details/53483493
 writer1 = tf.python_io.TFRecordWriter('../data/test1.tfrecord')
 writer2 = tf.python_io.TFRecordWriter('../data/test2.tfrecord')
 
-X = np.random.randn(100, 4, 2).reshape([100, -1]).astype(np.float32)  # 100个样本
-y = np.random.randint(0, 2, [100])
+X = np.arange(0, 100).reshape([50, -1]).astype(np.float32)  # 50个样本
+y = np.arange(50)
 
 for i in tqdm(xrange(len(X))):   # **2.对于每个样本
-    if 0 == i % 2:
+    if i > len(y) / 2:
         writer = writer1
     else:
         writer = writer2
