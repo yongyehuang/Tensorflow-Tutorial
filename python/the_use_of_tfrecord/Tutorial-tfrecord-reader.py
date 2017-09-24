@@ -29,7 +29,7 @@ sess.run(init)
 
 tf.train.start_queue_runners(sess=sess)
 y_outputs = list()
-for i in xrange(25):
+for i in xrange(5):
     _X_batch, _y_batch = sess.run([X_batch, y_batch])
     print('** batch %d' % i)
     print('_X_batch:', _X_batch)

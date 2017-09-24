@@ -2,7 +2,8 @@
 
 import tensorflow as tf
 import os
-config  = tf.ConfigProto()
+
+config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 
@@ -23,11 +24,10 @@ if os.path.exists(FLAGS.log_dir):
 os.makedirs(FLAGS.log_dir)
 print 'created log_dir path'
 
-
 with tf.name_scope('add_example'):
-    a = tf.Variable(tf.truncated_normal([100,1], mean=0.5, stddev=0.5), name='var_a')
+    a = tf.Variable(tf.truncated_normal([100, 1], mean=0.5, stddev=0.5), name='var_a')
     tf.summary.histogram('a_hist', a)
-    b = tf.Variable(tf.truncated_normal([100,1], mean=-0.5, stddev=1.0), name='var_b')
+    b = tf.Variable(tf.truncated_normal([100, 1], mean=-0.5, stddev=1.0), name='var_b')
     tf.summary.histogram('b_hist', b)
     increase_b = tf.assign(b, b + 0.05)
     c = tf.add(a, b)
@@ -35,7 +35,7 @@ with tf.name_scope('add_example'):
     c_mean = tf.reduce_mean(c)
     tf.summary.scalar('c_mean', c_mean)
 merged = tf.summary.merge_all()
-writer = tf.summary.FileWriter(FLAGS.log_dir+'add_example', sess.graph)
+writer = tf.summary.FileWriter(FLAGS.log_dir + 'add_example', sess.graph)
 
 
 def main(_):

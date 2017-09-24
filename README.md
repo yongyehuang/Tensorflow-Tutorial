@@ -16,6 +16,8 @@ Some interesting TensorFlow tutorials for beginners.
 - [TensorFlow入门（九）使用 tf.train.Saver()保存模型]
 - [TensorFlow入门（十）【迁移学习】往一个已经保存好的模型添加新的变量并进行微调]
 - [Tensorflow入门（十一） 【模型联合】如何利用tf.train.saver()把多个预训练好的模型联合起来fine-tune](https://github.com/yongyehuang/zhihu-text-classification/blob/master/models/Using%20saver%20to%20combine%20models.ipynb)
+- [Tensorflow入门（十二）使用 tfrecord 读取数据](https://github.com/yongyehuang/Tensorflow-Tutorial/tree/master/python/the_use_of_tfrecord)
+- [Tensorflow入门（十三）最基础的 seq2seq 机器翻译模型]
 
 ## Dependencies
 - python 2.7
