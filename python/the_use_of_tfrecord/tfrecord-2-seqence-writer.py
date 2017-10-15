@@ -5,6 +5,11 @@ import numpy as np
 from tqdm import tqdm
 
 '''tfrecord 写入序列数据，每个样本的长度不固定。
+和固定 shape 的数据处理方式类似，前者使用 tf.train.Example() 方式，而对于变长序列数据，需要使用 
+tf.train.SequenceExample()。 在 tf.train.SequenceExample() 中，又包括了两部分：
+context 来放置非序列化部分；
+feature_lists 放置变长序列。
+
 refer: 
 https://github.com/tensorflow/magenta/blob/master/magenta/common/sequence_example_lib.py
 https://github.com/dennybritz/tf-rnn

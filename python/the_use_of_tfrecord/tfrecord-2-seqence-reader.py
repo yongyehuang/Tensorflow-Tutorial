@@ -6,6 +6,15 @@ import math
 QUEUE_CAPACITY = 100
 SHUFFLE_MIN_AFTER_DEQUEUE = QUEUE_CAPACITY // 5
 
+"""
+读取变长序列数据。
+和固定shape的数据读取方式不一样，在读取变长序列中，我们无法使用 tf.train.shuffle_batch() 函数，只能使用
+tf.train.batch() 函数进行读取，而且，在读取的时候，必须设置 dynamic_pad 参数为 True, 把所有的序列 padding
+到固定长度（该batch中最长的序列长度），padding部分为 0。
+
+此外，在训练的时候为了实现 shuffle 功能，我们可以使用 RandomShuffleQueue 队列来完成。详见下面的 _shuffle_inputs 函数。
+"""
+
 
 def _shuffle_inputs(input_tensors, capacity, min_after_dequeue, num_threads):
     """Shuffles tensors in `input_tensors`, maintaining grouping."""
