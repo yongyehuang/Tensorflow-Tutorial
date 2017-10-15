@@ -3,4 +3,5 @@ summary/*
 data/*
 *.pyc
 .ipynb_checkpoints/*
+mnist_png/*
 
