@@ -31,10 +31,19 @@ y_out = features['y']
 print(X_out)
 print(y_out)
 X_batch, y_batch = tf.train.batch([X_out, y_out],
-                                  batch_size=5,
+                                  batch_size=6,
                                   capacity=20,
                                   num_threads=2,
                                   allow_smaller_final_batch=True)  # 保证遍历完整个数据集
+
+# 由于设定了读取轮数（num_epochs）为1，所以就算使用 shuffle_batch, 也会保证只取一个epoch，不重复，也不会漏失
+# X_batch, y_batch = tf.train.shuffle_batch([X_out, y_out],
+#                                           batch_size=6,
+#                                           capacity=20,
+#                                           min_after_dequeue=10,
+#                                           num_threads=2,
+#                                           allow_smaller_final_batch=True)
+
 sess = tf.Session()
 # 注意下面这个，如果设了 num_epoch，需要初始化 local_variables
 init = tf.group(tf.global_variables_initializer(),
@@ -44,7 +53,7 @@ sess.run(init)
 coord = tf.train.Coordinator()
 threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 y_outputs = list()
-for i in xrange(5):
+for i in xrange(25):
     try:
         _X_batch, _y_batch = sess.run([X_batch, y_batch])
         print('** batch %d' % i)
