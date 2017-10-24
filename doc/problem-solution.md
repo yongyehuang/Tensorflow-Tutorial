@@ -60,6 +60,12 @@ A：没想明白.
 ## 9.在BN中，为什么通过将activation规范为均值和方差一致的手段使得原本会减小的activation的scale变大？
 [在BN中，是通过将activation规范为均值和方差一致的手段使得原本会减小的activation的scale变大。可以说是一种更有效的local response normalization方法（见4.2.1节）。](https://www.zhihu.com/question/38102762) 在 BN 中，通过mini-batch来规范化某些层/所有层的输入，从而可以固定每层输入信号的均值与方差。对于 mini-batch，首先减去均值，方差归一；接着进行 scale and shift 操作，也就是用学习到的全局均值和方差替换掉了 mini-batch 的均值和方差。 然后送入激活函数如（sigmoid）中，**这时候并没有把sigmoid的输入约束到 0 附近呀，为什么就能够避免梯度消失？**
 
+A：首先，对于 sigmoid 和 tanh 来说，当输入的绝对值很大时就会陷入饱和区。这个激活函数的输入一般指的是 z(=wx)。
+z 很大 -> 陷入饱和区
+z 很大 -> wx 这两个向量的点积很大 -> 如果 w 或者 x 的元素值很大，较容易使得 wx 很大？ -> w，x 的值很大
+BN 避免了梯度消失 -> BN 处理使得 x 向 0 靠近了。但是没有呀？？
+
+
 
 
 
