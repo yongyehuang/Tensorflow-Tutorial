@@ -67,7 +67,7 @@ BN 避免了梯度消失 -> BN 处理使得 x 向 0 靠近了。但是没有呀�
 
 
 ## 9.center loss 训练有什么需要注意的？center loss 会使类间的相对距离增大吗？
-> center loss 最小化类内距离，但是并没有显式地去最大化类间距离。在我的实验中，对加了center loss 的高层特征进行统计分析，发现类内特征的方差明显要比原来更小了，但是特征均值也比原来更小了。这样类间的绝对距离也会比原来小，假设类间中心距离为 L-extra，类内的距离为 L-intra, 类间的相对距离为 L-relative = (L-extra / L-intra)。那么，加上 center loss 后， L-relative 怎么变化？
+> center loss 最小化类内距离，但是并没有显式地去最大化类间距离。在我的实验中，对加了center loss 的高层特征进行统计分析，发现类内特征的方差明显要比原来更小了，但是特征均值也比原来更小了。这样类间的绝对距离也会比原来小，假设类间中心距离为 L-inter，类内的距离为 L-intra, 类间的相对距离为 L-relative = (L-inter / L-intra)。那么，加上 center loss 后， L-relative 怎么变化？
 
 A：1.在模型训练的时候记得把每个类的中心特征向量留出接口，以便后继分析。
 
