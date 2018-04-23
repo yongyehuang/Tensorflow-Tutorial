@@ -1,2 +1,3 @@
-model_checkpoint_path: "T9-2-vs2.ckpt-1"
-all_model_checkpoint_paths: "T9-2-vs2.ckpt-1"
+model_checkpoint_path: "bi-lstm.ckpt-6"
+all_model_checkpoint_paths: "bi-lstm.ckpt-3"
+all_model_checkpoint_paths: "bi-lstm.ckpt-6"
