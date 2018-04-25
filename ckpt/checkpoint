@@ -1,3 +1,2 @@
-model_checkpoint_path: "bi-lstm.ckpt-6"
-all_model_checkpoint_paths: "bi-lstm.ckpt-3"
-all_model_checkpoint_paths: "bi-lstm.ckpt-6"
+model_checkpoint_path: "test-model.ckpt-2"
+all_model_checkpoint_paths: "test-model.ckpt-2"
