@@ -17,13 +17,22 @@
 
 如果有什么问题或者建议，欢迎开issue或者邮件与我联系：yongye@bupt.edu.cn
 
+
+## 运行环境
+- python 3.5
+- tensorflow 1.7.0 (gpu version)
+
+
+## 文件结构
+|- Tensorflow-Tutorial
+|　　|- example-notebook　　　　　# 入门教程 notebook 版
+|　　|- example-python　　　　　　# 入门教程 .py 版
+|　　|- utils_and_models　　　　　# 一些工具函数和一些实战的例子
+|　　|- data　　　　　　　      # 数据
+|　　|- doc　　　　　　　　　　   # 相关文档
+
+
 ## Notes
 
 
-## Dependencies
-- python 3.5
-- tensorflow 1.7.0 (gpu version)
-- numpy
-- matplotlib
-- pandas
-- sklearn
+
