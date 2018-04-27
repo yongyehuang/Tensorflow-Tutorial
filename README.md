@@ -34,45 +34,45 @@
 ```
 
 ## Notes
-### TensorFlow 的基本用法
+### T_01.TensorFlow 的基本用法
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_01%20Basic%20Usage.ipynb)
 
 介绍 TensorFlow 的变量、常量和基本操作，最后介绍了一个非常简单的回归拟合例子。
 
-### 实现一个两层的全连接网络对 MNIST 进行分类
+### T_02.实现一个两层的全连接网络对 MNIST 进行分类
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_02%20A%20simple%20feedforward%20network%20for%20MNIST.ipynb)
 
-### TensorFlow 变量命名管理机制
+### T_03.TensorFlow 变量命名管理机制
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_03%20The%20usage%20of%20%20name_scope%20and%20variable_scope.ipynb)
 
 介绍  tf.Variable() 和 tf.get_variable() 创建变量的区别；介绍如何使用 tf.name_scope() 和 tf.variable_scope() 管理命名空间。
 
 
-### 实现一个两层的卷积神经网络（CNN）对 MNIST 进行分类
+### T_04.实现一个两层的卷积神经网络（CNN）对 MNIST 进行分类
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_04_1%20Convolutional%20network%20for%20MNIST(1).ipynb)
 
 构建一个非常简单的 CNN 网络，同时输出中间各个核的可视化来理解 CNN 的原理。
 <center>
-<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/graph2.png" width="60%" height="60%">
+<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/conv_mnist.png" width="60%" height="60%">
 第一层卷积核可视化
 </center>
 
-### 实现多层的 LSTM 和 GRU 网络对 MNIST 进行分类
+### T_05.实现多层的 LSTM 和 GRU 网络对 MNIST 进行分类
 - [LSTM-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_05_1%20An%20understandable%20example%20to%20implement%20Multi-LSTM%20for%20MNIST.ipynb)
 - [GRU-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_05_2%20An%20understandable%20example%20to%20implement%20Multi-GRU%20for%20MNIST.ipynb)
 - [Bi-GRU-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_05_3%20Bi-GRU%20for%20MNIST.ipynb)
 
 <center>
-<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/lstm_8.png" width="30%" height="30%">
+<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/lstm_8.png" width="60%" height="60%">
 字符 8
 </center>
 
 <center>
-<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/lstm_mnist.png" width="30%" height="30%">
+<img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/lstm_mnist.png" width="60%" height="60%">
 lstm 对字符 8 的识别过程
 </center>
 
-### tensorboard 的简单用法
+### T_06.tensorboard 的简单用法
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_06%20A%20very%20simple%20example%20for%20tensorboard.ipynb)
 
 <center>
@@ -80,21 +80,21 @@ lstm 对字符 8 的识别过程
 简单的 tensorboard 可视化
 </center>
 
-### 使用 tf.train.Saver() 来保存模型
+### T_07.使用 tf.train.Saver() 来保存模型
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_07%20How%20to%20save%20the%20model.ipynb)
 
-### 【迁移学习】往一个已经保存好的 模型添加新的变量
+### T_08.【迁移学习】往一个已经保存好的 模型添加新的变量
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_08%20%20%5Btransfer%20learning%5D%20Add%20new%20variables%20to%20graph%20and%20save%20the%20new%20model.ipynb)
 
 
-### 使用 tfrecord 打包不定长的序列数据
+### T_09.使用 tfrecord 打包不定长的序列数据
 - [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_09%20%5Btfrecord%5D%20use%20tfrecord%20to%20store%20sequences%20of%20different%20length.ipynb)
 - [reader-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_2_seqence_reader.py)
 - [writer-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_2_seqence_writer.py)
 
 
-### 使用 tf.data.Dataset 和 tfrecord 给 numpy 数据构建数据集
- - [dataset-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_10_1%20%5BDataset%5D%20numpy%20data.ipynb)
+### T_10.使用 tf.data.Dataset 和 tfrecord 给 numpy 数据构建数据集
+ - [dataset-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_10%20%5BDataset%5D%20numpy%20data.ipynb)
  - [tfrecord-reader-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_1_numpy_reader.py)
  - [tfrecord-writer-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_1_numpy_writer.py)
 
@@ -111,8 +111,8 @@ lstm 对字符 8 的识别过程
 可以看到，使用 `initializable` 方式的速度明显要快很多。因为使用 `one-shot` 方式会把整个矩阵放在图中，计算非常非常慢。
 
 
-### 使用 tf.data.Dataset 和 tfrecord 给 图片数据 构建数据集
-- [dataset-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_10_2%20%5BDataset%5D%20image%20data.ipynb)
+### T_11.使用 tf.data.Dataset 和 tfrecord 给 图片数据 构建数据集
+- [dataset-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_11%20%5BDataset%5D%20image%20data.ipynb)
 - [tfrecord-writer-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_3_image_writer.py)
 - [tfrecord-reader-code](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/utils_and_models/u02_tfrecord/tfrecord_3_image_reader.py)
 
