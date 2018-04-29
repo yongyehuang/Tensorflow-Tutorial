@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*- 
 
 import tensorflow as tf
+
 import os
 import time
 import sys
@@ -28,7 +29,9 @@ features = tf.parse_single_example(serialized_example,
 img = features['image']
 # 这里需要对图片进行解码
 img = tf.image.decode_png(img, channels=3)  # 这里，也可以解码为 1 通道
-img = tf.reshape(img, [256, 256, 3])  # 256*256*3
+img = tf.image.resize_images(images=img, size=(224, 224))
+# img = tf.image.resize_image_with_crop_or_pad(img, 224, 224)
+# img = tf.reshape(img, [256, 256, 3])  # 256*256*3
 
 label = features['label']
 
@@ -47,9 +50,11 @@ X_batch, y_batch = tf.train.shuffle_batch([img, label], batch_size=100,
 """
 
 X_batch, y_batch = tf.train.shuffle_batch([img, label], batch_size=128,
-                                          capacity=5000, min_after_dequeue=100, num_threads=3)
+                                          capacity=5000, min_after_dequeue=100, num_threads=2)
 
-sess = tf.Session()
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config=config)
 init = tf.global_variables_initializer()
 sess.run(init)
 
@@ -68,7 +73,10 @@ threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 # print(y_outputs)
 
 time0 = time.time()
-for count in range(100):  # 100batch  5.4 seconds
+# 只解析图片                         200batch     9.6 seconds
+# resize_images                     200batch     22.8 seconds
+# resize_image_with_crop_or_pad     200batch     22.4 seconds
+for count in range(500):
     _X_batch, _y_batch = sess.run([X_batch, y_batch])
     sys.stdout.write("\rloop {}, pass {:.2f}s".format(count, time.time() - time0))
     sys.stdout.flush()
