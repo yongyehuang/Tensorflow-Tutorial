@@ -47,18 +47,30 @@
 
 
 #### T_03.TensorFlow 变量命名管理机制
-- [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_03%20The%20usage%20of%20%20name_scope%20and%20variable_scope.ipynb)
-
+- [notebook1](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_03%20The%20usage%20of%20%20name_scope%20and%20variable_scope.ipynb)
 介绍  tf.Variable() 和 tf.get_variable() 创建变量的区别；介绍如何使用 tf.name_scope() 和 tf.variable_scope() 管理命名空间。
+
+- [notebook2]()
+除了使用变量命名来管理变量之外，还经常用到 collection 的方式来聚合一些变量或者操作。
 
 
 
 #### T_04.实现一个两层的卷积神经网络（CNN）对 MNIST 进行分类
-- [notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_04_1%20Convolutional%20network%20for%20MNIST(1).ipynb)
+- [notebook1-使用原生API构建CNN](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_04_1%20Convolutional%20network%20for%20MNIST(1).ipynb)
 
 构建一个非常简单的 CNN 网络，同时输出中间各个核的可视化来理解 CNN 的原理。
 <center><img src="https://raw.githubusercontent.com/yongyehuang/Tensorflow-Tutorial/1.7.0/figs/conv_mnist.png" width="60%" height="60%">
 第一层卷积核可视化</center>
+
+- [notebook2-自定义函数构建CNN]()
+
+- [notebook3-使用tf.layers高级API构建CNN]()
+
+- [code-加入 BN 层的 CNN]()
+在上一个例子的基础上，加入 BN 层。在 CNN 中，使用 BN 层可以加速收敛速度，同时也能够减小初始化方式的影响。在使用 BN 层的时候要注意训练时用的是 mini-batch 的均值方差，测试时用的是指数平均的均值方差。所以在训练的过程中，一定要记得更新并保存均值方差。
+
+在这个小网络中：迭代 10000 步，batch_size=100，大概耗时 45s；添加了 BN 层之后，迭代同样的次数，大概耗时 90s.
+
 
 #### T_05.实现多层的 LSTM 和 GRU 网络对 MNIST 进行分类
 - [LSTM-notebook](https://github.com/yongyehuang/Tensorflow-Tutorial/blob/1.7.0/example-notebook/Tutorial_05_1%20An%20understandable%20example%20to%20implement%20Multi-LSTM%20for%20MNIST.ipynb)
@@ -134,3 +146,7 @@ lstm 对字符 8 的识别过程</center>
 |tfrecord|5000|5.3|
 
 如果是在 SSD 上面的话,tf 的队列方式应该也是比较快的.打包成 tfrecord 格式只是减少了小文件的读取，其实现也是使用队列的。
+
+
+#### T_12.TensorFlow 高级API tf.layers 的使用
+使用 TensorFlow 原生的 API 能够帮助自己很好的理解网络的细节，但是往往比较低效。 tf.layers 和 tf.keras 一样，是一个封装得比较好的一个高级库，接口用着挺方便的。所以在开发的时候，可以使用高级的接口能够有效的提高工作效率。

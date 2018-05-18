@@ -5,5 +5,5 @@ data/*
 .ipynb_checkpoints/*
 mnist_png/*
 *.tfrecord
-
+MNIST_data/
 

@@ -25,6 +25,6 @@ logger = logging.getLogger('train')  # 获取名为tst的logger
 logger.addHandler(handler)  # 为logger添加handler
 logger.setLevel(logging.DEBUG)
 
-for i in xrange(10):
+for i in range(10):
     logger.info('first info message %d' % i)
     logger.debug('first debug message %d' % i)
