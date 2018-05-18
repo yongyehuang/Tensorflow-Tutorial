@@ -6,4 +6,7 @@ data/*
 mnist_png/*
 *.tfrecord
 MNIST_data/
+*ckpt/
+*summary/
+*data/
 
