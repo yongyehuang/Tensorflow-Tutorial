@@ -6,6 +6,10 @@ import warnings
 
 warnings.filterwarnings('ignore')  # 不打印 warning
 
+import matplotlib
+
+matplotlib.use('Agg')
+
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -49,7 +53,7 @@ def generator(z, reuse=False):
         return x
 
 
-def disctiminator(x, reuse=False):
+def discriminator(x, reuse=False):
     """判别器。
     D网络中使用LeakyReLU作为激活函数。
     """
@@ -107,7 +111,7 @@ def get_batch(img_paths, labels, batch_size=50, height=64, width=64, channel=3):
     return X_batch, y_batch
 
 
-def generate_img(sess, seed=3, show=False, save_path='generated_img2'):
+def generate_img(sess, seed=3, show=False, save_path='generated_img'):
     """利用随机噪声生成图片， 并保存图片。"""
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -142,35 +146,32 @@ real_img_input = tf.placeholder(tf.float32, shape=[None, image_dim, image_dim, n
 gen_image = generator(noise_input)
 
 # 判别器有两种输入，一种真实图像，一种生成器生成的假图像
-disc_real = disctiminator(real_img_input)  # 真图像输出的结果
-disc_fake = disctiminator(gen_image, reuse=True)
-disc_concat = tf.concat([disc_real, disc_fake], axis=0)
+disc_real = discriminator(real_img_input)  # 真图像输出的结果
+disc_fake = discriminator(gen_image, reuse=True)
 
-# 构建 target
-disc_target = tf.placeholder(tf.float32, shape=[None])
-gen_target = tf.placeholder(tf.float32, shape=[None])
-
-# 损失函数
-disc_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=tf.reshape(disc_concat, [-1]),
-                                                                   labels=disc_target))
-gen_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=tf.reshape(disc_fake, [-1]),
-                                                                  labels=gen_target))
+# 损失函数 (与DCGAN第1个改变)
+disc_loss = tf.reduce_mean(disc_fake - disc_real)
+gen_loss = tf.reduce_mean(-disc_fake)
 
 # 两个优化器
-# Build Optimizers
+# Build Optimizers (第2个改变)
 global_step = tf.Variable(0, trainable=False, name='Global_Step')
-optimizer_gen = tf.train.AdamOptimizer(learning_rate=0.0002, beta1=0.5)
-optimizer_disc = tf.train.AdamOptimizer(learning_rate=0.0002, beta1=0.5)
+optimizer_gen = tf.train.RMSPropOptimizer(learning_rate=5e-5)
+optimizer_disc = tf.train.RMSPropOptimizer(learning_rate=5e-5)
+
 # G 和 D 的参数
 gen_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope='Generator')
 # Discriminator Network Variables
 disc_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope='Discriminator')
 
+# 对于 D 的参数进行裁剪  （第3个改变，注意每次更新完 D 后都要执行裁剪）
+clipped_disc = [tf.assign(v, tf.clip_by_value(v, -0.01, 0.01)) for v in disc_vars]
+
 # Create training operations
 update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
 with tf.control_dependencies(update_ops):  # 这句话的意思是当运行下面的内容(train_op) 时，一定先执行 update_ops 的所有操作
-    train_gen = optimizer_gen.minimize(gen_loss, var_list=gen_vars)
-    train_disc = optimizer_disc.minimize(disc_loss, var_list=disc_vars, global_step=global_step)
+    train_gen = optimizer_gen.minimize(gen_loss, var_list=gen_vars, global_step=global_step)
+    train_disc = optimizer_disc.minimize(disc_loss, var_list=disc_vars)
 
 # 模型要保存的变量
 # var_list = tf.global_variables() + tf.local_variables()  # 这样保存所有变量不会出错，但是很多没必要的变量也保存了。414M 每个 ckpt
@@ -194,7 +195,7 @@ if not os.path.exists(ckpt_path):
 # Training Params
 num_steps = 500000
 batch_size = 64
-g_step = 3  # 更新一次 D, 更新 g_step 次 G
+d_iters = 5  # 更新 d_iters 次 D, 更新 1 次 G
 
 # 构建数据读取函数
 img_paths, labels = get_file_path()
@@ -217,33 +218,31 @@ with tf.Session(config=config) as sess:
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
+
+    def get_batch():
+        # 准备输入数据：真实图片
+        X_batch, _ = sess.run([get_X_batch, get_y_batch])  # 本例中不管 _y_batch 的label
+        # 准备噪声输入
+        z_batch = np.random.uniform(-1., 1., size=[batch_size, noise_dim])
+        # Training 这里的输入不需要 target
+        feed_dict = {real_img_input: X_batch, noise_input: z_batch}
+        return feed_dict
+
+
     try:
         tic = time.time()
         for i in range(1, num_steps + 1):
+            # update 5 次 D，update 1 次 G
+            dl = 0.0
+            for _ in range(d_iters):
+                _, _, dl = sess.run([train_disc, clipped_disc, disc_loss], feed_dict=get_batch())
+            _, gl = sess.run([train_gen, gen_loss], feed_dict=get_batch())
 
-            # 准备输入数据：真实图片
-            X_batch, y_batch = sess.run([get_X_batch, get_y_batch])  # 本例中不管 _y_batch 的label
-            # 准备噪声输入
-            z_batch = np.random.uniform(-1., 1., size=[batch_size, noise_dim])
-
-            # 对于判别器：所有的真实图片类别为 1，所有的生成图片类别给0
-            batch_disc_y = np.concatenate([np.ones([batch_size]), np.zeros([batch_size])], axis=0)
-            # 对于生成器：所有的生成图片类别都给1
-            batch_gen_y = np.ones([batch_size])
-
-            # Training
-            feed_dict = {real_img_input: X_batch, noise_input: z_batch,
-                         disc_target: batch_disc_y, gen_target: batch_gen_y}
-            # update 1 次 D，update 2 次 G
-            _, dl = sess.run([train_disc, disc_loss], feed_dict=feed_dict)
-            gl = 0.0
-            for _ in range(g_step):
-                _, gl = sess.run([train_gen, gen_loss], feed_dict=feed_dict)
-
-            if i % 10 == 0:
-                print('Step {}: Generator Loss: {:.2f}, Discriminator Loss: {:.2f}. Time passed {:.2f}s'.format(i, gl, dl,
-                                                                                                                time.time() - tic))
-                if i % 500 == 0:  # 每训练 1000 step，生成一次图片
+            if i % 5 == 0:
+                print(
+                    'Step {}: Generator Loss: {:.2f}, Discriminator Loss: {:.2f}. Time passed {:.2f}s'.format(i, gl, dl,
+                                                                                                              time.time() - tic))
+                if i % 200 == 0:  # 每训练 1000 step，生成一次图片
                     generate_img(sess)
                     path = saver.save(sess, os.path.join(ckpt_path, 'model.ckpt'), global_step=sess.run(global_step))
                     print("Save model to {} ".format(path))
@@ -254,4 +253,3 @@ with tf.Session(config=config) as sess:
     finally:
         coord.request_stop()
         coord.join(threads)
-

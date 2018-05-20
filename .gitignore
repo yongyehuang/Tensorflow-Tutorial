@@ -11,4 +11,5 @@ mnist_png/*
 **/ckpt/
 **/summary/
 **/data/
-
+**/generated_img_gp/
+**/ckpt2/
