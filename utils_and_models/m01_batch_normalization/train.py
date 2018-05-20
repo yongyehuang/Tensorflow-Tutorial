@@ -58,13 +58,12 @@ def main():
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     with tf.Session(config=config) as sess:
+        print("initializing variables.")
+        sess.run(tf.global_variables_initializer())
+        sess.run(tf.local_variables_initializer())
         if os.path.exists(my_setting.ckpt_path + 'checkpoint'):
             print("restore checkpoint.")
             saver.restore(sess, tf.train.latest_checkpoint(my_setting.ckpt_path))
-        else:
-            print("initializing variables.")
-            sess.run(tf.global_variables_initializer())
-            sess.run(tf.local_variables_initializer())
         tic = time.time()
         for step in range(my_setting.training_steps):
             if 0 == step % 100:

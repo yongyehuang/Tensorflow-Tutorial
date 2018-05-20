@@ -2,10 +2,12 @@ ckpt/*
 summary/*
 data/*
 *.pyc
-.ipynb_checkpoints/*
+**/.ipynb_checkpoints/
 mnist_png/*
 *.tfrecord
-MNIST_data/
+**/generated_img/
+**/generated_img2/
+**/MNIST_data/
 **/ckpt/
 **/summary/
 **/data/
