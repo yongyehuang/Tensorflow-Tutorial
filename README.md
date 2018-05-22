@@ -159,10 +159,10 @@ lstm 对字符 8 的识别过程</center>
 # 2.TensorFlow 实战(持续更新)
 下面的每个例子都是相互独立的，每个文件夹下面的代码都是可以单独运行的，不依赖于其他文件夹。
 
-## [m01_batch_normalization: Batch Normalization 的使用]
+## [m01_batch_normalization: Batch Normalization 的使用](https://github.com/yongyehuang/Tensorflow-Tutorial/tree/master/models/m01_batch_normalization)
 参考：[tensorflow中batch normalization的用法](https://www.cnblogs.com/hrlnw/p/7227447.html)
 
-## [m02_dcgan: 使用 DCGAN 生成二次元头像]
+## [m02_dcgan: 使用 DCGAN 生成二次元头像](https://github.com/yongyehuang/Tensorflow-Tutorial/tree/master/models/m02_dcgan)
 参考：
 - [原论文:Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1511.06434)
 - [GAN学习指南：从原理入门到制作生成Demo](https://zhuanlan.zhihu.com/p/24767059)
@@ -177,7 +177,7 @@ lstm 对字符 8 的识别过程</center>
 
 运行： `python dcgan.py `
 
-## [m03_wgan: 使用 WGAN 生成二次元头像]
+## [m03_wgan: 使用 WGAN 生成二次元头像](https://github.com/yongyehuang/Tensorflow-Tutorial/tree/master/models/m03_wgan)
 这里的生成器和判别器我只实现了 DCGAN，没有实现 MLP. 如果想实现的话可以参考下面的两个例子。
 参考：
 - [原论文:Wasserstein GAN](https://arxiv.org/pdf/1701.07875.pdf)
@@ -187,3 +187,8 @@ lstm 对字符 8 的识别过程</center>
 原版的 wgan： `python wgan.py `
 
 改进的 wgan-gp: `python wgan_gp.py`
+
+
+## [m04_pix2pix: image-to-image](https://github.com/yongyehuang/Tensorflow-Tutorial/tree/master/models/m04_pix2pix)
+代码来自：[affinelayer/pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow)
+

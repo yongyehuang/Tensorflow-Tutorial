@@ -7,9 +7,14 @@ mnist_png/*
 *.tfrecord
 **/generated_img/
 **/generated_img2/
+**/generated_img_gp/
 **/MNIST_data/
 **/ckpt/
+**/ckpt*/
 **/summary/
 **/data/
-**/generated_img_gp/
-**/ckpt2/
+events*
+**/facades_train/
+**/facades_test/
+
+

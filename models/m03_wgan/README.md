@@ -6,3 +6,5 @@
 
 
 运行： `python wgan.py ` 即可
+
+(wgan-gp.py 仍有bug...)

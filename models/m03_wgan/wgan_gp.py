@@ -141,8 +141,8 @@ image_dim = 64  # 头像的尺度
 n_channel = 3
 noise_dim = 100  # 输入噪声 z 的维度
 
-noise_input = tf.placeholder(tf.float32, shape=[batch_size, noise_dim])
-real_img_input = tf.placeholder(tf.float32, shape=[batch_size, image_dim, image_dim, n_channel])
+noise_input = tf.placeholder(tf.float32, shape=[None, noise_dim])
+real_img_input = tf.placeholder(tf.float32, shape=[None, image_dim, image_dim, n_channel])
 
 # 构造网络：生成器
 gen_image = generator(noise_input)
@@ -159,7 +159,7 @@ gen_loss = tf.reduce_mean(-disc_fake)
 alpha = tf.random_uniform(shape=[batch_size, 1], minval=0., maxval=1.)
 diffrences = gen_image - real_img_input
 interpolates = real_img_input + (alpha * diffrences)
-gradients = tf.gradients(discriminator(interpolates, reuse=True), [interpolates])[0]
+gradients = tf.gradients(discriminator(interpolates, reuse=True), [interpolates, ])[0]
 grad_l2 = tf.sqrt(tf.reduce_sum(tf.square(gradients), axis=[1, 2, 3]))
 gradient_penalty = tf.reduce_mean((grad_l2 - 1.) ** 2)
 disc_loss += LAMBDA * gradient_penalty
@@ -167,8 +167,8 @@ disc_loss += LAMBDA * gradient_penalty
 # 两个优化器
 # Build Optimizers (第2个改变)
 global_step = tf.Variable(0, trainable=False, name='Global_Step')
-optimizer_gen = tf.train.AdamOptimizer(learning_rate=1e-4, beta1=0.5, beta2=0.9)
-optimizer_disc = tf.train.AdamOptimizer(learning_rate=1e-4, beta1=0.5, beta2=0.9)
+optimizer_gen = tf.train.AdamOptimizer(learning_rate=5e-5, beta1=0.5, beta2=0.9)
+optimizer_disc = tf.train.AdamOptimizer(learning_rate=5e-5, beta1=0.5, beta2=0.9)
 
 # G 和 D 的参数
 gen_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope='Generator')
@@ -249,7 +249,7 @@ with tf.Session(config=config) as sess:
             if i % 5 == 0:
                 print('Step {}: Generator Loss: {:.2f}, Discriminator Loss: {:.2f}. Time passed {:.2f}s'.format(i, gl, dl,
                                                                                                               time.time() - tic))
-                if i % 200 == 0:  # 每训练 1000 step，生成一次图片
+                if i % 100 == 0:  # 每训练 1000 step，生成一次图片
                     generate_img(sess)
                     path = saver.save(sess, os.path.join(ckpt_path, 'model.ckpt'), global_step=sess.run(global_step))
                     print("Save model to {} ".format(path))
